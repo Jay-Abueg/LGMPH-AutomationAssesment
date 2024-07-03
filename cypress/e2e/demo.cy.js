@@ -3,6 +3,9 @@ import 'cypress-mochawesome-reporter/register'
 const { expect } = require("chai")
 
 describe('Automation Assesment', () => {
+    Cypress.on('uncaught:exception', (err, runnable) => {
+        return false;
+      });
 
     it('Navigate to the demo home page', () => {
         cy.visit('http://www.way2automation.com/demo.html#')
@@ -14,11 +17,15 @@ describe('Automation Assesment', () => {
     })
 
     it('Retrive Traget url for the "Submit Button Clicked" event within the "Dynamic Elements" category', () => {
-
+        cy.get('#wrapper > div.container.margin-top-20 > div.row > div:nth-child(4) > ul > li:nth-child(1) > a > h2').contains('Submit Button Clicked')   
+        .invoke('attr', 'href')
+        .then(href => {
+            cy.log(href);
+        }).as('retrivedURL')
     })
 
     it('Visit the retrived link from Dynamic Elements category', () => {
-
+        cy.visit('@retrivedURL')
     })
 
     it('Fill out the dummy registration', () => {
