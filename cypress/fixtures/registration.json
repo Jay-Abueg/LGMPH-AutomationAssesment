@@ -1,0 +1,9 @@
+{
+    "name":"TestAutomation",
+    "phone":"1234567",
+    "email":"sample@email.com",
+    "country":"Philippines",
+    "city":"Cavite",
+    "username":"testUser",
+    "password":"testPassword"
+}

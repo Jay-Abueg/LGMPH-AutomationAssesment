@@ -1,5 +1,7 @@
 import '../support/commands'
 import 'cypress-mochawesome-reporter/register'
+import user from '../fixtures/registration.json'
+
 const { expect } = require("chai")
 
 describe('Automation Assesment', () => {
@@ -17,11 +19,11 @@ describe('Automation Assesment', () => {
     })
 
     it('Retrive Traget url for the "Submit Button Clicked" event within the "Dynamic Elements" category', () => {
-        cy.get('#wrapper > div.container.margin-top-20 > div.row > div:nth-child(4) > ul > li:nth-child(1) > a > h2').contains('Submit Button Clicked')   
-        .invoke('attr', 'href')
-        .then(href => {
-            cy.log(href);
-        }).as('retrivedURL')
+        cy.get('h2', 'Submit Button Clicked')
+         .invoke('attr', 'href')
+         .then(href => {
+             cy.log(href);
+         }).as('retrivedURL')
     })
 
     it('Visit the retrived link from Dynamic Elements category', () => {
@@ -29,11 +31,18 @@ describe('Automation Assesment', () => {
     })
 
     it('Fill out the dummy registration', () => {
-
+        cy.visit('https://way2automation.com/way2auto_jquery/index.php') // hardcoded since step 2 is failing
+        cy.get('[name="name"]').type(user.name)  
+        cy.get('[name="phone"]').type(user.phone)
+        cy.get('[name="email"]').type(user.email)
+        cy.get('[name="country"]').type(user.country)
+        cy.get('[name="city"]').type(user.city)
+        cy.get('[id=load_box]').children('[name="username"]').type(user.username)
+        cy.get('[id=load_box]').children('[name="password"]').type(user.password)
     })
 
     it(' Click the "EXPLORE LIFETIME MEMBERSHIP" link', () => {
-
+        cy.get('#load_form > div:nth-child(13) > div > p:nth-child(2) > a').click()
     })
 
     it('Scroll to "30+ Courses video library FREE ACCESS"', () => {
