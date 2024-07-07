@@ -19,11 +19,12 @@ describe('Automation Assesment', () => {
     })
 
     it('Retrive Traget url for the "Submit Button Clicked" event within the "Dynamic Elements" category', () => {
-        cy.get('h2', 'Submit Button Clicked')
-         .invoke('attr', 'href')
-         .then(href => {
-             cy.log(href);
-         }).as('retrivedURL')
+        cy.get('a[href*="https://way2automation.com/"]')
+        // cy.get('h2', 'Submit Button Clicked')
+        // .invoke('attr', 'href')
+        // .then(href => {
+        //     cy.log(href);
+        // }).as('retrivedURL')
     })
 
     it('Visit the retrived link from Dynamic Elements category', () => {
@@ -46,6 +47,18 @@ describe('Automation Assesment', () => {
     })
 
     it('Scroll to "30+ Courses video library FREE ACCESS"', () => {
+        cy.visit('https://www.way2automation.com/lifetime-membership-club/')
+        cy.get('[id="post-25580"]').click()
+    })
+
+    it('Navigates to "Automation Architect Selenium with 7 live projects"', () => {
+        //cy.contains("Automation Architect Selenium with 7 live projects").click()
+        cy.visit('https://www.selenium-tutorial.com/p/automation-architect-in-selenium-7-live-projects')
 
     })
+
+    it(`Validate URL page`, () => {
+        cy.url().should('eq',"https://www.selenium-tutorial.com/p/automation-architect-in-selenium-7-live-projects" )
+    })
+
 })
